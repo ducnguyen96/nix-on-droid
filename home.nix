@@ -8,4 +8,7 @@
   home.stateVersion = "23.05";
 
   # insert home-manager config
+  imports = [
+    ./neovim
+  ];
 }
