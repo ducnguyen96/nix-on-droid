@@ -20,7 +20,6 @@
     autocd = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
 
     history = {
       expireDuplicatesFirst = true;
