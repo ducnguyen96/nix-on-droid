@@ -10,7 +10,7 @@
   home.homeDirectory = "/data/data/com.termux.nix/files/home";
 
   home.sessionVariables = {
-    TERM = "xterm-256color";
+    TERMINAL = "xterm-256color";
   };
 
   # insert home-manager config
