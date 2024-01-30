@@ -11,9 +11,9 @@ require("lazy").setup({
 		-- add LazyVim and import its plugins
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		-- import any extras modules here
-		{ import = "lazyvim.plugins.extras.lang.typescript" },
-		{ import = "lazyvim.plugins.extras.lang.json" },
-		{ import = "lazyvim.plugins.extras.lang.markdown" },
+		-- { import = "lazyvim.plugins.extras.lang.typescript" },
+		-- { import = "lazyvim.plugins.extras.lang.json" },
+		-- { import = "lazyvim.plugins.extras.lang.markdown" },
 		-- import/override with your plugins
 		{ import = "plugins.LSP" },
 		{ import = "plugins.editor" },
@@ -23,8 +23,6 @@ require("lazy").setup({
 		{ import = "plugins.extras.code.copilot" },
 		{ import = "plugins.extras.editor" },
 		{ import = "plugins.extras.lang.nix" },
-		{ import = "plugins.extras.lang.php" },
-		{ import = "plugins.extras.lang.svelte" },
 		{ import = "plugins.extras.util.project" },
 		{ import = "plugins.extras.util.harpoon" },
 		{ import = "plugins.extras.util" },
