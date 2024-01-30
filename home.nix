@@ -15,6 +15,9 @@
 
   # insert home-manager config
   imports = [
-    ./neovim
+    ./programs/git.nix
+    ./programs/ranger.nix
+    ./programs/neovim
+    ./shell
   ];
 }
