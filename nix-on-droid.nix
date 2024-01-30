@@ -10,12 +10,13 @@
     vim # or some other editor, e.g. nano or neovim
 
     # Some common stuff that people expect to have
+    git
     #diffutils
     #findutils
-    #utillinux
+    utillinux
     #tzdata
-    #hostname
-    #man
+    hostname
+    man
     #gnugrep
     #gnupg
     #gnused
