@@ -27,5 +27,6 @@
     ncurses
     unzip
     gawk
+    rsync
   ];
 }
