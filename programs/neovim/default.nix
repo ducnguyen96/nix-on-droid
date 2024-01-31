@@ -72,6 +72,10 @@ in {
     source = ./config/lua;
   };
 
+  home.file."${config.home.homeDirectory}/.config/lazygit/config.yml".text = ''
+    disableStartupPopups:  true
+  '';
+
   home.file."nvim.desktop" = {
     text = ''
       [Desktop Entry]
