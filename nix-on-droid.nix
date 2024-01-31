@@ -41,7 +41,7 @@
   '';
 
   # Set your time zone
-  #time.timeZone = "Europe/Berlin";
+  time.timeZone = "Asia/Ho_Chi_Minh";
 
   # Configure home-manager
   home-manager = {
@@ -50,7 +50,7 @@
     useGlobalPkgs = true;
   };
 
-  terminal.font = ~/.local/share/fonts/FiraCode/FiraCodeNerdFont-Medium.ttf;
+  terminal.font = ./assets/fonts/FiraCodeNerdFont-Medium.ttf;
 
   user = {
     shell = "${pkgs.zsh}/bin/zsh";

@@ -58,7 +58,8 @@
       fzf = getExe skim;
       v = "nvim";
       n = "nvim";
-      r = "ranger";
+      ra = "ranger";
+      r = "rebuild";
       g = "git";
       ga = "git add";
       gab = "git add . && rebuild";
