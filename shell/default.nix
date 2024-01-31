@@ -18,6 +18,7 @@
       wget
       file
       htop
+      openssh
     ];
 
     sessionVariables = {
