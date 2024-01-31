@@ -20,4 +20,12 @@
     ./programs/neovim
     ./shell
   ];
+
+  home.packages = with pkgs; [
+    curl
+    fontconfig
+    ncurses
+    unzip
+    gawk
+  ];
 }

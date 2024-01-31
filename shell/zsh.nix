@@ -20,6 +20,7 @@
     autocd = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    syntaxHighlighting.enable = true;
 
     history = {
       expireDuplicatesFirst = true;
@@ -61,7 +62,10 @@
       gc = "git commit";
       gp = "git push";
       gs = "git status";
+      la = "${getExe eza} -lah --tree";
+      ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
       ps = getExe procs;
+      tree = "${getExe eza} --tree --icons --tree";
       untar = "tar -xvf";
       untargz = "tar -xzf";
       awsume = ". awsume";

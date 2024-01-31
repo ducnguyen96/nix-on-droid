@@ -48,4 +48,6 @@
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
   };
+
+  terminal.font = ~/.local/share/fonts/FiraCode/FireCodeNerdFont-Medium.ttf;
 }
