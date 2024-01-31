@@ -49,5 +49,5 @@
     useGlobalPkgs = true;
   };
 
-  terminal.font = ~/.local/share/fonts/FiraCode/FireCodeNerdFont-Medium.ttf;
+  terminal.font = ~/.local/share/fonts/FiraCode/FiraCodeNerdFont-Medium.ttf;
 }
