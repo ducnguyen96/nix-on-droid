@@ -28,5 +28,6 @@
     unzip
     gawk
     rsync
+    pfetch
   ];
 }
