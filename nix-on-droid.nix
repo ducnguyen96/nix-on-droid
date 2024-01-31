@@ -51,4 +51,8 @@
   };
 
   terminal.font = ~/.local/share/fonts/FiraCode/FiraCodeNerdFont-Medium.ttf;
+
+  user = {
+    shell = "${pkgs.zsh}/bin/zsh";
+  };
 }
