@@ -58,6 +58,7 @@
       fzf = getExe skim;
       v = "nvim";
       n = "nvim";
+      nod = "nix-on-droid";
       ra = "ranger";
       r = "rebuild";
       g = "git";
