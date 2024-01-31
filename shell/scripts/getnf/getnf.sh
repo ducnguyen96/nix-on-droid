@@ -1,6 +1,3 @@
-{pkgs, ...}: let
-  getnf =
-    pkgs.writeShellScriptBin "getnf" ''
 #defining variables
 nerdfontsrepo='https://api.github.com/repos/ryanoasis/nerd-fonts'
 aFontInstalled="False"
@@ -116,7 +113,7 @@ function download_font() {
 }
 
 function install_font() {
-    echo "${BLUE}$1 installation started...${RESET}"
+	echo "${BLUE}$1 installation started...${RESET}"
 	unzip -qqo "$1.zip" -d "$dist_dir/$1"
 	echo "${GREEN}$1 installation finished${RESET}"
 }
@@ -225,7 +222,3 @@ if [ "$aFontInstalled" = "True" ]; then
 fi
 
 echo "${GREEN}Enjoy your new fonts!${RESET}"
-    '';
-in {
-  home.packages = [getnf];
-}

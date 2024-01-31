@@ -6,6 +6,6 @@
 }: {
   imports = [
     ./rebuild.nix
-    ./getnf.nix
+    ./getnf
   ];
 }
