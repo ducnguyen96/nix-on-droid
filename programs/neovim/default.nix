@@ -54,6 +54,8 @@ in {
 
     nodejs
     nodePackages.prettier
+
+    lua-language-server
   ];
 
   programs.neovim = {
