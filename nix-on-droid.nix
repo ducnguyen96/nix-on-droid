@@ -14,6 +14,7 @@
     #diffutils
     #findutils
     utillinux
+    iputils
     #tzdata
     hostname
     man
