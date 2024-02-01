@@ -58,6 +58,7 @@ in {
 
     # lua formatter
     stylua
+    lua-language-server
 
     nodejs
     go
