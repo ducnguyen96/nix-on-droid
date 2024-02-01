@@ -41,21 +41,26 @@ in {
     mimeTypes);
 
   home.packages = with pkgs; [
+    # dependencies
     cmake
     gnumake
     gcc
     lazygit
     fd
     ripgrep
-    tree-sitter
-    stylua
+    wl-clipboard
+
+    # shell formatter
     shfmt
+
+    # nix formatter
     alejandra
 
-    nodejs
-    nodePackages.prettier
+    # lua formatter
+    stylua
 
-    lua-language-server
+    nodejs
+    go
   ];
 
   programs.neovim = {
