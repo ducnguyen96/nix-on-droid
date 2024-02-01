@@ -11,6 +11,7 @@
 
   home.sessionVariables = {
     TERMINAL = "xterm-256color";
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
   # insert home-manager config
