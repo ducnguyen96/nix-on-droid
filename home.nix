@@ -19,7 +19,8 @@
     ./programs/git.nix
     ./programs/ranger.nix
     ./programs/neovim
-    ./shell
+    ./programs/shell
+    ./programs/dev/go.nix
   ];
 
   home.packages = with pkgs; [
