@@ -17,37 +17,121 @@
       mss = "$HOME/Music";
     };
 
+    autosuggestion = {
+      enable = true;
+    };
+
     autocd = true;
-    enableAutosuggestions = true;
+
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
+
+    syntaxHighlighting = {
+      enable = true;
+      highlighters = ["main" "brackets" "pattern" "cursor" "regexp" "root" "line"];
+    };
 
     history = {
       expireDuplicatesFirst = true;
-      path = "${config.xdg.dataHome}/zsh_history";
+      ignoreDups = true;
+      ignoreSpace = true;
+      path = "${config.xdg.dataHome}/zsh/zsh_history";
     };
 
     sessionVariables = {
+      DIRENV_LOG_FORMAT = "";
       LC_ALL = "en_US.UTF-8";
-      ZSH_AUTOSUGGEST_USE_ASYNC = "true";
     };
 
-    initExtra = ''
-      zstyle ':completion:*' completer _complete _ignored _approximate
-      zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-      zstyle ':completion:*' menu select
-      zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-      zstyle ':completion:*' verbose true
-      zstyle ':completion:*' use-cache on
-      zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+    initExtraBeforeCompInit = ''
+      fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)
+    '';
+
+    completionInit = ''
+      # Load Zsh modules
+      zmodload zsh/zle
+      zmodload zsh/zpty
+      zmodload zsh/complist
+
+      # Initialize colors
+      autoload -Uz colors
+      colors
+
+      # Initialize completion system
+      autoload -Uz compinit
+
+      # if [[ -n ${config.home.homeDirectory}/.config/zsh/.zcompdump(#qN.mh+24) ]]; then
+      #  compinit;
+      # else
+      #  compinit -C;
+      # fi;
+      compinit -C;
+
       _comp_options+=(globdots)
 
-      bindkey "^[[1;5C" forward-word
-      bindkey "^[[1;5D" backward-word
-      bindkey '^H' backward-kill-word
-      bindkey '^[[1~' beginning-of-line
-      bindkey '^[[4~' end-of-line
+      # Load edit-command-line for ZLE
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      bindkey "^e" edit-command-line
+
+      # General completion behavior
+      zstyle ':completion:*' completer _extensions _complete _approximate
+
+      # Use cache
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+      # Complete the alias
+      zstyle ':completion:*' complete true
+
+      # Autocomplete options
+      zstyle ':completion:*' complete-options true
+
+      # Completion matching control
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+      zstyle ':completion:*' keep-prefix true
+
+      # Group matches and describe
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' list-grouped false
+      zstyle ':completion:*' list-separator '''
+      zstyle ':completion:*' group-name '''
+      zstyle ':completion:*' verbose yes
+      zstyle ':completion:*:matches' group 'yes'
+      zstyle ':completion:*:warnings' format '%F{red}%B-- No match for: %d --%b%f'
+      zstyle ':completion:*:messages' format '%d'
+      zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+      zstyle ':completion:*:descriptions' format '[%d]'
+
+      # Colors
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+
+      # Directories
+      zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+      zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+      zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+      zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+      zstyle ':completion:*' special-dirs true
+      zstyle ':completion:*' squeeze-slashes true
+
+      # Sort
+      zstyle ':completion:*' sort false
+      zstyle ":completion:*:git-checkout:*" sort false
+      zstyle ':completion:*' file-sort modification
+      zstyle ':completion:*:eza' sort false
+      zstyle ':completion:complete:*:options' sort false
+      zstyle ':completion:files' sort false
+
+    '';
+
+    initExtra = ''
+      # Vi mode key bindings
+      bindkey -v
+      bindkey -M menuselect 'h' vi-backward-char
+      bindkey -M menuselect 'k' vi-up-line-or-history
+      bindkey -M menuselect 'l' vi-forward-char
+      bindkey -M menuselect 'j' vi-down-line-or-history
+      bindkey "^A" vi-beginning-of-line
+      bindkey "^E" vi-end-of-line
     '';
 
     shellAliases = with lib;
@@ -56,11 +140,11 @@
       cat = "${getExe bat} --style=plain";
       du = getExe du-dust;
       fzf = getExe skim;
-      v = "nvim";
-      n = "nvim";
-      nod = "nix-on-droid";
-      ra = "ranger";
       r = "rebuild";
+      n = "nvim --listen /tmp/nvim-server.pipe";
+      v = "nvim --listen /tmp/nvim-server.pipe";
+      vim = "nvim --listen /tmp/nvim-server.pipe";
+      nvim = "nvim --listen /tmp/nvim-server.pipe";
       g = "git";
       ga = "git add";
       gab = "git add . && rebuild";
@@ -74,30 +158,33 @@
       untar = "tar -xvf";
       untargz = "tar -xzf";
       awsume = ". awsume";
-      nv = "nvim";
-      ytmp3 = ''${lib.getExe yt-dlp} -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" -o "${config.home.homeDirectory}/Music/youtube/%(title)s.%(ext)s"'';
     };
 
-    plugins = [
+    plugins = with pkgs; [
       {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.8.0";
-          sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-        };
+        name = "zsh-forgit";
+        src = pkgs.zsh-forgit;
+        file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
       }
       {
-        name = "fzf-tab";
-        file = "fzf-tab.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "master";
-          sha256 = "sha256-gvZp8P3quOtcy1Xtt1LAW1cfZ/zCtnAmnWqcwrKel6w=";
-        };
+        name = "zsh-fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+      {
+        name = "zsh-you-should-use";
+        src = pkgs.zsh-you-should-use;
+        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }
+      {
+        name = "zsh-nix-shell";
+        src = zsh-nix-shell;
+        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+      }
+      {
+        name = "zsh-vi-mode";
+        src = zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
   };

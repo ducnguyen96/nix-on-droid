@@ -13,12 +13,15 @@
 
   home = {
     packages = with pkgs; [
-      yt-dlp
       unzip
       wget
       file
       htop
       openssh
+      ripgrep
+      gawk
+      ncurses5
+      gnugrep
     ];
 
     sessionVariables = {

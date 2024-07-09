@@ -45,10 +45,11 @@ in {
     cmake
     gnumake
     gcc
-    lazygit
     fd
     ripgrep
     wl-clipboard
+    tree-sitter
+    nodejs
 
     # shell formatter
     shfmt
@@ -56,12 +57,15 @@ in {
     # nix formatter
     alejandra
 
-    # lua formatter
-    stylua
+    # lua
     lua-language-server
+    stylua
 
-    nodejs
-    go
+    # web-related formatter
+    nodePackages.prettier
+
+    # nix language server
+    nil
   ];
 
   programs.neovim = {
@@ -72,6 +76,10 @@ in {
     extraPython3Packages = ps: with ps; [python-dotenv requests pynvim prompt-toolkit];
   };
 
+  programs.lazygit = {
+    enable = true;
+  };
+
   home.file."${config.home.homeDirectory}/.config/nvim/init.lua" = {
     source = ./config/init.lua;
   };
@@ -80,16 +88,12 @@ in {
     source = ./config/lua;
   };
 
-  home.file."${config.home.homeDirectory}/.config/lazygit/config.yml".text = ''
-    disableStartupPopups:  true
-  '';
-
   home.file."nvim.desktop" = {
     text = ''
       [Desktop Entry]
       Name=Neovim
       Comment=Edit text files
-      Exec=${config.home.sessionVariables.TERMINAL} -e nvim %F
+      Exec=kgx -e nvim %F
       Terminal=true
       Type=Application
       Icon=nvim

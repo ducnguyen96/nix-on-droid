@@ -5,7 +5,7 @@
   programs.git = {
     enable = true;
 
-    userName = "ducnguyen";
+    userName = "ducnguyen96";
     userEmail = "levinguyen.dl@gmail.com";
 
     aliases = {

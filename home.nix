@@ -5,7 +5,7 @@
   ...
 }: {
   # Read the changelog before changing this value
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 
   home.homeDirectory = "/data/data/com.termux.nix/files/home";
 
@@ -23,12 +23,5 @@
   ];
 
   home.packages = with pkgs; [
-    curl
-    fontconfig
-    ncurses
-    unzip
-    gawk
-    rsync
-    pfetch
   ];
 }
