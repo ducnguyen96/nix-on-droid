@@ -50,6 +50,7 @@ in {
     wl-clipboard
     tree-sitter
     nodejs
+    python3
 
     # shell formatter
     shfmt
@@ -60,9 +61,6 @@ in {
     # lua
     lua-language-server
     stylua
-
-    # web-related formatter
-    nodePackages.prettier
 
     # nix language server
     nil
