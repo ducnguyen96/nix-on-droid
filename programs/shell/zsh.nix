@@ -110,7 +110,7 @@
       zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
       zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
       zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
-      zstyle ':completion:*' special-dirs true
+      zstyle ':completion:*' special-dirs false
       zstyle ':completion:*' squeeze-slashes true
 
       # Sort
