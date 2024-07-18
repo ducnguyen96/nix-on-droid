@@ -21,6 +21,7 @@
     ./programs/neovim
     ./programs/shell
     ./programs/dev/go.nix
+    ./programs/dev/js.nix
   ];
 
   home.packages = with pkgs; [
