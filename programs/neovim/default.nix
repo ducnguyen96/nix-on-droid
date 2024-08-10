@@ -50,17 +50,11 @@ in {
     wl-clipboard
     tree-sitter
     nodejs
+    yarn
     python3
-
-    # shell formatter
-    shfmt
 
     # nix formatter
     alejandra
-
-    # lua
-    lua-language-server
-    stylua
 
     # nix language server
     nil
