@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = [pkgs.cloudflared];
+  environment.packages = [pkgs.cloudflared];
 
   users.users.cloudflared = {
     group = "cloudflared";
