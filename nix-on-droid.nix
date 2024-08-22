@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [
+    ./services/cloudflared.nix
+  ];
+
   # Simply install just the packages
   environment.packages = with pkgs; [
   ];
