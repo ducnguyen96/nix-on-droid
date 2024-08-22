@@ -1,10 +1,7 @@
 {pkgs, ...}: {
-  imports = [
-    ./services/cloudflared.nix
-  ];
-
   # Simply install just the packages
   environment.packages = with pkgs; [
+    cloudflared
   ];
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
